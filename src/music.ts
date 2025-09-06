@@ -237,9 +237,9 @@ const openMidiOut = async () => {
 
   // List available MIDI ports
   const outputs = await midi.info().outputs;
-  console.log("Available MIDI outputs:");
+  console.error("Available MIDI outputs:");
   outputs.forEach((output: any, index: number) => {
-    console.log(`  ${index}: ${output.name}`);
+    console.error(`  ${index}: ${output.name}`);
   });
 
   // Try to connect to FL Studio, GarageBand or use default
@@ -253,10 +253,10 @@ const openMidiOut = async () => {
   );
 
   if (flStudioPort) {
-    console.log(`Connecting to: ${flStudioPort.name}`);
+    console.error(`Connecting to: ${flStudioPort.name}`);
     port = await midi.openMidiOut(flStudioPort.name);
   } else {
-    console.log("Using default MIDI output");
+    console.error("Using default MIDI output");
     port = await midi.openMidiOut();
   }
 

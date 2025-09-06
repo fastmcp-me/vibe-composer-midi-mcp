@@ -1,14 +1,18 @@
 {
-  "name": "mhello-world-mcp",
-  "version": "1.0.0",
-  "description": "A hello world MCP server implementation in TypeScript",
+  "name": "vibe-composer-midi-mcp",
+  "version": "1.0.2",
+  "description": "A MIDI MCP server implementation in TypeScript",
   "scripts": {
     "dev": "tsx --watch ./src/index.ts",
     "seed": "tsx ./src/seed.ts",
     "db:init": "tsx ./src/database.ts",
     "test:db": "tsx ./src/test-db.ts"
   },
-  "author": "",
+  "author": "Mike Borozdin",
+  "main": "dist/index.js",
+  "bin": {
+    "vibe-composer-midi-mcp": "./dist/index.js"
+  },
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.1",

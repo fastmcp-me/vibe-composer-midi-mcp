@@ -38,7 +38,7 @@ const tracks = {
           noteDuration: "1/8",
         },
       ],
-      instrumentName: "drums",
+      instrumentName: "drums" as const,
     },
   ],
 };
