@@ -1,0 +1,29 @@
+{
+  "name": "mhello-world-mcp",
+  "version": "1.0.0",
+  "description": "A hello world MCP server implementation in TypeScript",
+  "scripts": {
+    "dev": "tsx --watch ./src/index.ts",
+    "seed": "tsx ./src/seed.ts",
+    "db:init": "tsx ./src/database.ts",
+    "test:db": "tsx ./src/test-db.ts"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.1",
+    "@types/better-sqlite3": "^7.6.13",
+    "axios": "^1.11.0",
+    "better-sqlite3": "^12.2.0",
+    "express": "^5.1.0",
+    "jzz": "^1.9.3",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^20.0.0",
+    "@types/play-sound": "^1.1.2",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}
