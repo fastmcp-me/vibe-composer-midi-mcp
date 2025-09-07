@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import express from "express";
+import { ListMidiOutputsMcpTool } from "../src/mcp/tools/list-midi-outputss.tool";
 import { PlayMusicMcpTool } from "../src/mcp/tools/play-music.tool";
 
 (async () => {
@@ -14,10 +15,18 @@ import { PlayMusicMcpTool } from "../src/mcp/tools/play-music.tool";
       });
 
       const server = new McpServer({
-        name: "music-mcp",
+        name: "vibe-composer-midi-mcp",
         version: "1.0.0",
       });
 
+      server.registerTool(
+        ListMidiOutputsMcpTool.name,
+        {
+          title: ListMidiOutputsMcpTool.title,
+          description: ListMidiOutputsMcpTool.description,
+        },
+        ListMidiOutputsMcpTool.handler
+      );
       server.registerTool(
         PlayMusicMcpTool.name,
         {

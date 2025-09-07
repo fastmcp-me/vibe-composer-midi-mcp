@@ -4,6 +4,10 @@ import { Midi } from "../../midi/midi";
 
 const inputSchema = {
   bpm: z.number().describe("The BPM of the song"),
+  midiOuputName: z
+    .string()
+    .optional()
+    .describe("The MIDI output name to use. Don't add unless requested."),
   tracks: z
     .array(
       z.object({
@@ -18,6 +22,12 @@ const inputSchema = {
             ).join(
               ", "
             )}. If you want to make it a drum track, set the instrumentName to 'drums'.`
+          ),
+        channel: z
+          .number()
+          .optional()
+          .describe(
+            "The MIDI channel of the track. Don't add unless requested."
           ),
         notes: z
           .array(
@@ -93,15 +103,13 @@ const PlayMusicMcpTool = {
   handler: async (
     input: PlayMusicMcpToolInput
   ): Promise<{ content: { type: "text"; text: string }[] }> => {
-    console.error("got request");
-    console.error(JSON.stringify(input, null, 2));
-
     const midi = new Midi();
 
     await midi.init();
 
     await midi.playScore({
       bpm: input.bpm,
+      midiOuputName: input.midiOuputName,
       tracks: input.tracks as any,
     });
 

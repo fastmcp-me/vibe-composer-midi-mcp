@@ -3,6 +3,7 @@ import { Drums, Instruments } from "./instruments";
 interface Score {
   tracks: Track[];
   bpm: number;
+  midiOuputName?: string;
 }
 
 interface Track {

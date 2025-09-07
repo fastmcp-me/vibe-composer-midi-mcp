@@ -2,20 +2,25 @@ import JZZ from "jzz";
 import { Drums, Instruments } from "./instruments";
 import { DrumName, InstrumentName, Score, Track } from "./midi.types";
 
+const openMidi = async () => {
+  return await JZZ();
+};
+
 const openMidiOut = async () => {
   const midi = await JZZ();
-  const port = await midi.openMidiOut();
-  return port;
+
+  return midi.openMidiOut();
 };
 
 type MidiOut = Awaited<ReturnType<typeof openMidiOut>>;
 
 class Midi {
+  private midi: Awaited<ReturnType<typeof openMidi>> | null = null;
   private port: MidiOut | null = null;
   private bpm: number = 120; // Default tempo
 
   async init() {
-    this.port = await openMidiOut();
+    this.midi = await JZZ();
   }
 
   private setBpm(bpm: number) {
@@ -123,7 +128,6 @@ class Midi {
 
     await Promise.all(
       note.map((n) => {
-        console.log({ channel, n });
         return this.port?.noteOn(channel, n, 127);
       })
     );
@@ -164,7 +168,37 @@ class Midi {
     }
   }
 
+  private async openMidiOut(midiOutputName?: string) {
+    if (!this.midi) {
+      throw new Error("MIDI engine not initialized");
+    }
+
+    if (!midiOutputName) {
+      this.port = await this.midi.openMidiOut();
+    } else {
+      const midiOutput = (await this.listOutputs()).find(
+        (output: { name: string }) => output.name === midiOutputName
+      );
+
+      if (midiOutput) {
+        this.port = await this.midi.openMidiOut(midiOutput.name);
+      } else {
+        this.port = await this.midi.openMidiOut();
+      }
+    }
+  }
+
+  public async listOutputs() {
+    if (!this.midi) {
+      throw new Error("MIDI engine not initialized");
+    }
+
+    return this.midi.info().outputs;
+  }
+
   public async playScore(score: Score) {
+    await this.openMidiOut(score.midiOuputName);
+
     this.setBpm(score.bpm);
 
     return Promise.all(score.tracks.map((track) => this.playTrack(track)));

@@ -1,6 +1,6 @@
 {
   "name": "vibe-composer-midi-mcp",
-  "version": "1.0.9",
+  "version": "1.1.1",
   "author": "Mike Borozdin",
   "description": "Multi-track MIDI MCP server for vibe composing music",
   "keywords": [
