@@ -1,4 +1,4 @@
-import { Midi } from "./music";
+import { Midi } from "./midi/midi";
 
 const tracks = {
   bpm: 120,
@@ -47,7 +47,7 @@ const tracks = {
         { note: ["E2"], noteDuration: "1/4" },
         { note: ["C2"], noteDuration: "1/4" },
       ],
-      instrumentName: "electric_bass_finger",
+      instrumentName: "electric_bass_finger" as const,
     },
     {
       notes: [
@@ -63,7 +63,7 @@ const tracks = {
         { note: ["D4"], noteDuration: "1/8" },
         { note: ["D4"], noteDuration: "1/8" },
       ],
-      instrumentName: "overdriven_guitar",
+      instrumentName: "overdriven_guitar" as const,
     },
   ],
 };

@@ -1,6 +1,6 @@
 import JZZ from "jzz";
-import { Instruments } from "./instruments";
-import { InstrumentName, MidiOut, Score, Track } from "./midi.types";
+import { Drums, Instruments } from "./instruments";
+import { DrumName, InstrumentName, Score, Track } from "./midi.types";
 
 const openMidiOut = async () => {
   const midi = await JZZ();
@@ -102,7 +102,7 @@ class Midi {
   }
 
   private async playNote(
-    note: string[],
+    note: string[] | number[],
     duration: number,
     channel: number = 0,
     instrumentName?: InstrumentName
@@ -123,6 +123,7 @@ class Midi {
 
     await Promise.all(
       note.map((n) => {
+        console.log({ channel, n });
         return this.port?.noteOn(channel, n, 127);
       })
     );
@@ -145,33 +146,22 @@ class Midi {
       actualChannel = 0;
     }
 
-    for (const { note, noteDuration } of track.notes) {
+    const actualInstrumentName: InstrumentName | undefined =
+      track.instrumentName === "drums" ? undefined : track.instrumentName;
+
+    for (const { note, drums, noteDuration } of track.notes) {
+      let actualNote =
+        track.instrumentName === "drums"
+          ? (drums?.map((d) => Drums[d as DrumName]) as unknown as number[])
+          : (note as string[]);
+
       await this.playNote(
-        note as string[],
+        actualNote,
         this.beatsToMs(this.parseNoteDuration(noteDuration)),
         actualChannel,
-        track.instrumentName as InstrumentName | undefined
+        actualInstrumentName
       );
     }
-
-    // if (track.instrumentName === "drums") {
-    //   for (const { note, noteDuration } of track.notes) {
-    //     await this.playNote(
-    //       note as string[],
-    //       this.beatsToMs(this.parseNoteDuration(noteDuration)),
-    //       track.channel ?? 9
-    //     );
-    //   }
-    // } else {
-    //   for (const { note, noteDuration } of track.notes) {
-    //     await this.playNote(
-    //       note as string[],
-    //       this.beatsToMs(this.parseNoteDuration(noteDuration)),
-    //       track.channel ?? 0,
-    //       track.instrumentName
-    //     );
-    //   }
-    // }
   }
 
   public async playScore(score: Score) {
@@ -180,3 +170,5 @@ class Midi {
     return Promise.all(score.tracks.map((track) => this.playTrack(track)));
   }
 }
+
+export { Midi };

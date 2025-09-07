@@ -18,4 +18,4 @@ interface Track {
 type InstrumentName = keyof typeof Instruments;
 type DrumName = keyof typeof Drums;
 
-export type { DrumName, InstrumentName, MidiOut, Score, Track };
+export type { DrumName, InstrumentName, Score, Track };
