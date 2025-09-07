@@ -1,9 +1,14 @@
 # vibe-composer-midi-mcp
 
 - Vibe composer as an MCP server
+- Watch [the video for an overview](<(https://www.youtube.com/watch?v=8Sbbf874YWQ)>)
 - Talk to an LLM and compose music!
 - Multi track - not just a piano, but the whole band
 - Also can output to a software or a hardware synthesizer for a better sound!
+
+# Complete example on YouTube
+
+[Complete example](https://www.youtube.com/watch?v=8Sbbf874YWQ)
 
 # Example prompts
 
