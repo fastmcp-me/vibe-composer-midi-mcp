@@ -1,4 +1,4 @@
-import { Midi } from "./midi/midi";
+import { Midi } from "../src/midi/midi";
 
 const tracks = {
   bpm: 120,
