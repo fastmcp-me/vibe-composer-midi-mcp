@@ -267,26 +267,10 @@ class Midi {
   private midi: Awaited<ReturnType<typeof JZZ>> | null = null;
   private port: Awaited<ReturnType<typeof openMidiOut>> | null = null;
   private bpm: number = 120; // Default tempo
-  private octaveOffset: number = 2; // GarageBand octave correction (C3 in JZZ = C1 in GarageBand)
 
   async init() {
     this.midi = await JZZ();
     this.port = await openMidiOut();
-  }
-
-  // Adjust note for GarageBand's octave numbering
-  private adjustNoteForGarageBand(note: string | number): string | number {
-    // if (typeof note === "string" && /^[A-G]#?\d$/.test(note)) {
-    //   // Parse note name and octave
-    //   const match = note.match(/^([A-G]#?)(\d)$/);
-    //   if (match) {
-    //     const noteName = match[1];
-    //     const octave = parseInt(match[2]);
-    //     // Adjust octave by adding offset
-    //     return `${noteName}${octave + this.octaveOffset}`;
-    //   }
-    // }
-    return note;
   }
 
   // Set tempo in BPM
@@ -392,19 +376,16 @@ class Midi {
     if (instrumentName) {
       this.setInstrument(channel, instrumentName);
     }
-    // const adjustedNote = this.adjustNoteForGarageBand(note);
 
     await Promise.all(
       note.map((n) => {
-        const adjustedNote = this.adjustNoteForGarageBand(n);
-        return this.port?.noteOn(channel, adjustedNote, 127);
+        return this.port?.noteOn(channel, n, 127);
       })
     );
     await this.port.wait(duration);
     await Promise.all(
       note.map((n) => {
-        const adjustedNote = this.adjustNoteForGarageBand(n);
-        return this.port?.noteOff(channel, adjustedNote);
+        return this.port?.noteOff(channel, n);
       })
     );
   }

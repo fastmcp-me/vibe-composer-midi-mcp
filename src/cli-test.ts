@@ -40,6 +40,15 @@ const tracks = {
       ],
       instrumentName: "drums" as const,
     },
+    {
+      notes: [
+        { note: ["C2"], noteDuration: "1/4" },
+        { note: ["G2"], noteDuration: "1/4" },
+        { note: ["C2"], noteDuration: "1/4" },
+        { note: ["G2"], noteDuration: "1/4" },
+      ],
+      instrumentName: "electric_bass_finger",
+    },
   ],
 };
 
