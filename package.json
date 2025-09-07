@@ -1,6 +1,6 @@
 {
   "name": "vibe-composer-midi-mcp",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "author": "Mike Borozdin",
   "description": "Multi-track MIDI MCP server for vibe composing music",
   "keywords": [
@@ -12,6 +12,7 @@
     "music",
     "composition"
   ],
+  "homepage": "https://github.com/mikeborozdin/vibe-composer-midi-mcp",
   "license": "MIT",
   "scripts": {
     "dev": "tsx --watch ./dev/mcp-server.http.ts",
