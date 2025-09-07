@@ -1,7 +1,7 @@
 import { Midi } from "./music";
 
 const tracks = {
-  bpm: 100,
+  bpm: 120,
   tracks: [
     {
       notes: [
@@ -42,12 +42,28 @@ const tracks = {
     },
     {
       notes: [
+        { note: ["E2"], noteDuration: "1/4" },
         { note: ["C2"], noteDuration: "1/4" },
-        { note: ["G2"], noteDuration: "1/4" },
+        { note: ["E2"], noteDuration: "1/4" },
         { note: ["C2"], noteDuration: "1/4" },
-        { note: ["G2"], noteDuration: "1/4" },
       ],
       instrumentName: "electric_bass_finger",
+    },
+    {
+      notes: [
+        { note: ["E4", "B4"], noteDuration: "1/8" },
+        { note: ["D4"], noteDuration: "1/8" },
+
+        { note: ["D4"], noteDuration: "1/8" },
+        { note: ["D4"], noteDuration: "1/8" },
+
+        { note: ["E4", "B4"], noteDuration: "1/8" },
+        { note: ["D4"], noteDuration: "1/8" },
+
+        { note: ["D4"], noteDuration: "1/8" },
+        { note: ["D4"], noteDuration: "1/8" },
+      ],
+      instrumentName: "overdriven_guitar",
     },
   ],
 };
