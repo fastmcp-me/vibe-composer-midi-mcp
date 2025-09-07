@@ -1,17 +1,26 @@
 {
   "name": "vibe-composer-midi-mcp",
-  "version": "1.0.7",
-  "description": "A MIDI MCP server implementation in TypeScript",
+  "version": "1.0.8",
+  "author": "Mike Borozdin",
+  "description": "Multi-track MIDI MCP server for vibe composing music",
+  "keywords": [
+    "midi",
+    "mcp",
+    "music",
+    "vibe",
+    "composing",
+    "music",
+    "composition"
+  ],
+  "license": "MIT",
   "scripts": {
     "dev": "tsx --watch ./dev/mcp-server.http.ts",
     "build": "rm -rf ./dist && tsc"
   },
-  "author": "Mike Borozdin",
   "main": "dist/mcp-server.cli.js",
   "bin": {
     "vibe-composer-midi-mcp": "./dist/mcp-server.cli.js"
   },
-  "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.1",
     "jzz": "^1.9.3",
